@@ -1,0 +1,162 @@
+var meta = {
+	"candidate": {
+		"id": ""
+		"name": "",
+		"email": "",
+		stream: '',
+		role: ''
+	},
+
+	user: {
+		eid: '',
+		name: '',
+		email: '',
+		password: ''
+	},
+	drive: {
+		id: '',
+		date: '',
+		name: ''
+	},
+	driveCandidate:{
+		driveId: ''
+		candidateId: ''
+	},
+	testTypes: {
+		id: '',
+		type: '',
+		order: ''
+	},
+	userTestResult: {
+		id: '',
+		testTypeId: '',
+		test: '',
+		score: '',
+		status: '',
+		driveId: ''
+	},
+	hiringStatus: {
+		userId: '',
+		driveId: '',
+		status: '',
+		comment: '',
+	}
+}
+
+var metaData = {
+	streams: ['QA', 'Java'],
+	role: ['Lead', 'Developer'],
+	testTypes: {
+		test: ['Yes', 'No'],
+		status: ['hold', 'clear', ...]
+	},
+	hiringStatus: ['selected', 'rejected']
+}
+
+var candidates = [
+	{
+		id: 0,
+		name: 'Sagar'
+		email: 'sagar@hero.com',
+		stream: 'WebUI',
+		role: 'Lead',
+		created: '',
+		updated: ''
+	},
+	{
+		id: 0,
+		name: 'Amitesh Kumar'
+		email: 'amitesh@hero.com',
+		stream: 'WebUI',
+		role: 'Lead'
+	}
+]
+
+
+var drives = [
+	{
+		id: 0,
+		date: '',
+		name: 'drive one'
+	},
+	{
+		id: 1,
+		date: '',
+		name: 'drive two'
+	}
+]
+
+var testTypes = [
+	{
+		id: '0',
+		type: 'mettl',
+		order: '0'
+	},
+	{
+		id: '1',
+		type: 'Mini PG',
+		order: '1'
+	},
+	{
+		id: '3',
+		type: 'PG',
+		order: '2'
+	}
+]
+
+var userTestResults = [
+	{
+
+	}
+]
+
+
+
+
+var rows = [
+	{
+		candidate: {
+			id: 14,
+			name: 'Sagar S',
+			email: 'sagar@gmail.com',
+			stream: 'WebUI',
+			role: 'Lead',
+			created: '01/05/2017',
+			updated: ''
+		},
+		drive: {
+			id: 13,
+			date: '01/05/2017',
+			name: 'May-Weekend-Drive1'
+		},
+		testTypes: [{
+			id: 21,
+			testTypeId: '1',
+			test: 'Interaction with objects',
+			score: '70',
+			status: 'clear',
+			driveId: 13
+		}, {
+			id: 23,
+			testTypeId: '2',
+			test: 'Observation test',
+			score: '80',
+			status: 'clear',
+			driveId: 13
+
+		}, {
+			id: 45,
+			testTypeId: '3',
+			test: 'Testing ability',
+			score: '86',
+			status: 'clear',
+			driveId: 13
+		}],
+		hiringStatus: {
+			userId: 14,
+			driveId: 13,
+			status: 'selected',
+			comment: 'He is good in this....',
+		}
+	}
+]
