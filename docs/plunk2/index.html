@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="styleSheet" href="http://ui-grid.info/release/ui-grid.min.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
+<script src="http://ui-grid.info/release/ui-grid-unstable.js"></script>
+<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-touch.min.js"></script>
+<script src="http://ui-grid.info/release/ui-grid.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
+<link rel="styleSheet" href="style.css" />
+
+
+<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+
+<script src="script.js"></script>
+
+</head>
+
+<body ng-app="influx">
+	
+	<div ng-controller="MainCtrl as vm">
+	
+		<div style="padding-left: 30px;">
+			<button type="button" id="addRow" class="btn btn-success" ng-click="addRow()">Add Row</button>
+		</div>
+		<div class="clearfix"></div>
+		<div category-header="vm.serviceGrid.columnDefs"></div>
+		<div class="clearfix"></div>
+		<div id="serviceGrid" 
+		ui-grid-move-columns 
+		ui-grid-selection
+		ui-grid-resize-columns
+		
+		ui-grid-pinning
+		ui-grid-exporter 
+		ui-grid-auto-resize
+		
+		ui-grid-edit
+		ui-grid="vm.serviceGrid" ></div>
+	</div>
+	
+</body>
+
+</html>
