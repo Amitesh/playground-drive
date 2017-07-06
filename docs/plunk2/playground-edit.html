@@ -1,8 +1,4 @@
-<style>
-    md-input-container:not(.md-input-invalid).md-input-has-value label {
-        color: rgb(129, 159, 193);
-    }
-</style>
+
 
 <div>
   <md-content layout-padding>
@@ -33,27 +29,27 @@
         <div layout="row">
             <md-input-container flex="50">
                 <label>Candidate Stream</label>
-                <md-select name = "kukusdsd" ng-model="vm.entity.canditate_stream" aria-label="Select" >
+                <md-select name = "candidateStream" ng-model="vm.entity.canditate_stream"  >
                     <md-option  ng-value="role.type" ng-repeat="role in vm.streams"><span>{{role.type}}</span></md-option>
                 </md-select>
             </md-input-container>
             <md-input-container flex="50">
                 <label>Candidate Role</label>
-                <md-select name = "kukusdsd" ng-model="vm.entity.canditate_role" aria-label="Select" >
+                <md-select name = "candidateRole" ng-model="vm.entity.canditate_role"  >
                     <md-option  ng-value="role.type" ng-repeat="role in vm.roles1"><span>{{role.type}}</span></md-option>
                 </md-select>
             </md-input-container>
         </div>
 
         <div layout="row">
-            <md-input-container flex="60">
+            <md-input-container flex="50">
                 <label>Drive Name</label>
                 <input required name="driveName" ng-model="vm.entity.drive_name">
                 <div ng-messages="projectForm.driveName.$error">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
-            <md-input-container flex="30">
+            <md-input-container flex="50">
                 <div flex-gt-xs>
                     <label>Drive Date</label>
                     <md-datepicker ng-model="vm.driveDate" md-placeholder="Enter date"></md-datepicker>
@@ -63,21 +59,21 @@
 
         <div layout="row">
             <md-input-container flex="20">
-                <label>TestType: Meetal</label>
+                <label>Meetal</label>
                 <md-select name="meetaltestStatus" ng-model="vm.entity.meetalTestStatus">
                     <md-option value="No">No</md-option>
                     <md-option value="Yes">Yes</md-option>
                 </md-select>
             </md-input-container>
             <md-input-container flex="20">
-                <label>TestType: MiniPg</label>
+                <label>MiniPg</label>
                 <md-select name="minipgTestStatus" ng-model="vm.entity.minipgTestStatus">
                     <md-option value="No">No</md-option>
                     <md-option value="Yes">Yes</md-option>
                 </md-select>
             </md-input-container>
             <md-input-container flex="20">
-                <label>TestType: Pg</label>
+                <label>Pg</label>
                 <md-select name="pgTestStatus" ng-model="vm.entity.pgTestStatus">
                     <md-option value="No">No</md-option>
                     <md-option value="Yes">Yes</md-option>
@@ -92,7 +88,7 @@
             </md-input-container>
             <md-input-container flex="20">
                 <label>Test Status</label>
-                <md-select name = "kukusddsd" ng-model="vm.entity.testTypes_status" aria-label="Select" >
+                <md-select name = "driveStatus" ng-model="vm.entity.testTypes_status" aria-label="Select" >
                     <md-option  ng-value="status" ng-repeat="status in vm.testStatus"><span>{{status}}</span></md-option>
                 </md-select>
             </md-input-container>
@@ -100,7 +96,7 @@
         <div layout="row">
             <md-input-container flex="30">
                 <label>HiringStatus</label>
-                <md-select name = "kukusdsd" ng-model="vm.entity.hiringStatus_status" aria-label="Select" >
+                <md-select name = "hiringStatus" ng-model="vm.entity.hiringStatus_status" aria-label="Select" >
                     <md-option ng-value="status" ng-repeat="status in vm.hiringStatus"><span>{{status}}</span></md-option>
                 </md-select>
             </md-input-container>

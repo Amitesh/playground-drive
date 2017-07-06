@@ -24,9 +24,11 @@
 }
 
 md-input-container {
-	margin:6px 0px!important;
+	margin:10px 0px!important;
 }
-
+md-input-container:not(.md-input-invalid).md-input-has-value label {
+  color: rgb(129, 159, 193);
+}
 
 .ui-grid-canvas{
 	width:auto!important;

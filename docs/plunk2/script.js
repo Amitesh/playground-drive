@@ -65,12 +65,12 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                     field: 'drive_date',
                     categoryDisplayName: 'Drive',
                     width:"90",
-                    displayName:"date"
+                    displayName:"drive date"
                 }, {
                     field: 'drive_name',
                     categoryDisplayName: 'Drive',
                     width:"99",
-                    displayName:"name"
+                    displayName:"drive name"
                 }, {
                     field: 'meetalTestStatus',
                     categoryDisplayName: 'Test Types',
@@ -99,13 +99,13 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                 },{
                     field: 'hiringStatus_status',
                     categoryDisplayName: 'Hiring Status',
-                    width:"70",
-                    displayName:"Status"
+                    width:"120",
+                    displayName:"hiring status"
                 },{
                     field: 'hiringStatus_comment',
                     categoryDisplayName: 'Hiring Status',
-                    width:"99",
-                    displayName:"Comment"
+                    width:"120",
+                    displayName:"comments"
                 }
                 ];
 
@@ -195,38 +195,7 @@ function RowEditCtrl($http, $modalInstance,  grid, row) {
     console.log(vm.driveDate);
     vm.Open = false;
 
-    /*vm.dt = new Date();
-    vm.dt2 = new Date();
 
-    vm.formatDate = function(theDate) {
-        var zeroPad = function(str) {
-            return ('0' + str).slice(-2);
-        };
-
-        var day = zeroPad(theDate.getDate());
-        var month = zeroPad(theDate.getMonth());
-        var year = theDate.getFullYear();
-
-        return [month, day, year].join('/');
-    };
-
-    vm.openC = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        vm.opened = true;
-    };
-
-    vm.open2 = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        vm.opened2 = true;
-    };
-
-    vm.update = function() {
-        alert(vm.dt2);
-    };*/
 
 
 	function save() {
