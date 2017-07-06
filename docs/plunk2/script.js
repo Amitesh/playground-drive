@@ -8,41 +8,6 @@ MainCtrl.$inject = [ '$scope', '$http', '$modal', '$timeout', 'RowEditor', 'uiGr
 function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
 	var vm = this;
 
-    vm.vss=new Date();
-
-    vm.dt = new Date();
-    vm.dt2 = new Date();
-
-    vm.formatDate = function(theDate) {
-        var zeroPad = function(str) {
-            return ('0' + str).slice(-2);
-        };
-
-        var day = zeroPad(theDate.getDate());
-        var month = zeroPad(theDate.getMonth());
-        var year = theDate.getFullYear();
-
-        return [month, day, year].join('/');
-    };
-
-    vm.openC = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        vm.opened = true;
-    };
-
-    vm.open2 = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        vm.opened2 = true;
-    };
-
-    vm.update = function() {
-        alert(vm.dt2);
-    };
-
 	vm.editRow = RowEditor.editRow;
 
 	vm.project = {
@@ -50,6 +15,8 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
 	    rate: 500,
 	    special: true
     };
+
+    vm.candidate = {id:200};
 
 	vm.testStatus = [{id: 1, type: 'Yes' }, {id: 2, type: 'No' }];
 	vm.streams = [{id: 1, type: 'Java' }, {id: 2, type: 'QA' }];
@@ -65,12 +32,12 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
 		multiSelect : false,
 		enableSorting : false,
 		enableFiltering : true,
-		enableGridMenu : true,
+		enableGridMenu : false,
 		rowTemplate : "<div ng-click=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
 	};
 
 	vm.serviceGrid.columnDefs = [{
-                    field: 'canditate_id',
+                    field: 'canditate.id',
                     categoryDisplayName: 'Candidate',
                     width:"40",
                     displayName:"id"
@@ -159,7 +126,6 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
 	$scope.addRow = function() {
 		var newService = {
 			"id" : "34"
-			
 		};
 		var rowTmp = {};
 		rowTmp.entity = newService;
@@ -193,14 +159,10 @@ function RowEditor($http, $rootScope, $modal) {
 	return service;
 }
 
-function RowEditCtrl($http, $modalInstance, $mdDateLocale, $filter, grid, row) {
+function RowEditCtrl($http, $modalInstance,  grid, row) {
 	var vm = this;
-	//vm.entity = angular.copy(row.entity);
+	vm.entity = angular.copy(row.entity);
 	vm.save = save;
-
-    $mdDateLocale.formatDate = function(date) {
-        return $filter('date')(vm.myDate, "dd-MM-yyyy");
-    };
 
     vm.candidate = {
         name : null,
@@ -324,12 +286,7 @@ app.directive('categoryHeader', function() {
             cols=scope.vm.serviceGrid.columnDefs;
             for(var i=0;i<cols.length;i++)
             {
-
-
-
                 totalWidth += Number(cols[i].width);
-
-
                 var displayName = (typeof(cols[i].categoryDisplayName) === "undefined") ?
                     "\u00A0" : cols[i].categoryDisplayName;
 
@@ -359,11 +316,8 @@ app.directive('categoryHeader', function() {
                     leftPx: left + 'px'
                 });
             }
-
         }
         return {
-
-
             templateUrl: 'category_header.html',
             link: link
         };

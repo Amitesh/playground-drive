@@ -21,7 +21,6 @@
             Your email must be between 6 and 30 characters long and look like an e-mail address.
           </div>
         </div>
-
         </md-input-container>
       </div>
 
@@ -101,8 +100,8 @@
         </div>
 
         <div layout="row">
-            <label>HiringStatus</label>
             <md-input-container flex="30">
+                <label>HiringStatus</label>
                 <md-select name = "kukusdsd" ng-model="vm.hiringStatus.status" aria-label="Select" >
                     <md-option ng-selected="" ng-value="status" ng-repeat="status in vm.hiringStatus"><span>{{status}}</span></md-option>
                 </md-select>
