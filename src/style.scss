@@ -1,11 +1,52 @@
-$bluegrey: #2B3A42;
+//@import '~bulma';
 
-pre {
-  padding: 20px;
-  background: $bluegrey;
-  color: #dedede;
-  text-shadow: 0 1px 1px rgba(#000, .5);
+
+/* For float */
+.float-left {
+  float: left; }
+
+.float-right {
+  float: right; }
+
+.float-clear {
+  clear: both;
+  height: 1px; }
+
+/* For modern browsers */
+.float-clearfix:before,
+.float-clearfix:after {
+  content: "";
+  display: table; }
+
+.float-clearfix:after {
+  clear: both; }
+
+/* For IE 6/7 (trigger hasLayout) */
+.float-clearfix {
+  zoom: 1; }
+
+
+body{
+  margin:0;
+  padding:0
 }
-pre {
-  background: $bluegrey url('code.png') no-repeat center center / 32px 32px;
+
+.header{
+  background-color: #222;
+  color: #ffffff;
+  padding: 20px;
+
+  h2{
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    color: #fff;
+  }
+  a{
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 10px;
+    font-size: 16px;
+    text-transform: capitalize;
+  }
 }

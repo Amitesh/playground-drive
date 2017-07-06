@@ -1,36 +1,54 @@
-import './style.scss'
+'use strict';
 
-import {groupBy} from 'lodash/collection'
-import people from './data/people'
+import angular from 'angular';
+import uirouter from 'angular-ui-router';
+
+import './style.scss';
+
+//
+// import {groupBy} from 'lodash/collection'
+// import people from './data/people'
 
 if (module.hot) {
   module.hot.accept()
 }
 
-const managerGroups = groupBy(people, 'manager')
 
-const root = document.querySelector('#root')
-root.innerHTML = `<pre>${JSON.stringify(managerGroups, null, 2)}</pre>`
+import navigationComponent from './components/navigation/navigation';
+import dashboardModule from './components/dashboard/index';
+import headerComponent from './components/header';
+import appComponent from './components/app/app.component';
 
-import codeURL from './code.png'
+let interviewDriveApp = angular.module('idriveApp', [
+    uirouter,
+    dashboardModule,
+    navigationComponent,
+    headerComponent
+]);
 
-const img = document.createElement('img')
-img.src = codeURL
-img.style.backgroundColor = "#2B3A42"
-img.style.padding = "20px"
-img.width = 32
-document.body.appendChild(img);
+interviewDriveApp.config(function($urlRouterProvider, $locationProvider, $stateProvider
+                                  ) {
+    'ngInject';
 
+    // $locationProvider.html5Mode(true);
+    // $locationProvider.hashPrefix('!');
 
-const routes = {
-  dashboard: () => {
-    System.import('./dashboard').then((dashboard) => {
-      dashboard.draw()
-    }).catch((err) => {
-      console.log("Chunk loading failed")
-    })
-  }
-}
+    $stateProvider
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            template: '<app></app>'
+        })
+        // Dashboard page to contain our goats list page
+        .state('app.dashboard', {
+            url: '/dashboard',
+            template: '<dashboard></dashboard>'
+        });
 
-// demo async loading with a timeout
-setTimeout(routes.dashboard, 1000)
+    $urlRouterProvider.otherwise('/app/dashboard');
+});
+interviewDriveApp.component('app', appComponent);
+
+// interviewDriveApp.run(function(){
+//     angular.bootstrap(document, ['idriveApp']);
+// });
