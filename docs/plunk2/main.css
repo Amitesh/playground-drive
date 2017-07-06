@@ -1,9 +1,46 @@
-body {
-  padding: 10px;
+
+.header {
+  width: 100%;
+  background:#fff,url('/images/playground.png');
+  height: 800px;
 }
 
-.grid {
+.inputdemoErrors .inputErrorsApp {
+  min-height: 38px; }
+
+.inputdemoErrors md-input-container > p {
+  font-size: 0.8em;
+  text-align: left;
   width: 100%;
+}
+
+md-input-container {
+  margin:18px 0px!important;
+}
+
+
+.ui-grid-canvas{
+  width:auto!important;
+}
+.grid, .rowgroup, .ui-grid-header-canvas, .ui-grid-header-viewport, .ui-grid-top-panel{
+  width:auto!important;
+}
+
+div.block{
+  overflow:hidden;
+}
+div.block label{
+  width:160px;
+  display:block;
+  float:left;
+  text-align:left;
+}
+div.block .input{
+  margin-left:4px;
+  float:left;
+}
+.grid {
+  width: auto;
   height: 240px;
   border: 1px solid #d4d4d4;
   font-size:11px;

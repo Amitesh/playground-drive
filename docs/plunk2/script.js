@@ -1,4 +1,4 @@
-var app = angular.module('influx', [ 'ngAnimate', 'ui.grid', 'ui.grid.moveColumns', 'ui.grid.selection', 'ui.grid.resizeColumns', 'ui.bootstrap', 'ui.grid.edit' ])
+var app = angular.module('influx', [ 'ngAnimate', 'ngMaterial', "ngMessages", 'ui.grid', 'ui.grid.moveColumns', 'ui.grid.selection', 'ui.grid.resizeColumns', 'ui.bootstrap', 'ui.utils', 'ui.grid.edit' ])
 
 app.controller('MainCtrl', MainCtrl);
 app.controller('RowEditCtrl', RowEditCtrl);
@@ -8,16 +8,65 @@ MainCtrl.$inject = [ '$scope', '$http', '$modal', '$timeout', 'RowEditor', 'uiGr
 function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
 	var vm = this;
 
+    vm.vss=new Date();
+
+    vm.dt = new Date();
+    vm.dt2 = new Date();
+
+    vm.formatDate = function(theDate) {
+        var zeroPad = function(str) {
+            return ('0' + str).slice(-2);
+        };
+
+        var day = zeroPad(theDate.getDate());
+        var month = zeroPad(theDate.getMonth());
+        var year = theDate.getFullYear();
+
+        return [month, day, year].join('/');
+    };
+
+    vm.openC = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        vm.opened = true;
+    };
+
+    vm.open2 = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        vm.opened2 = true;
+    };
+
+    vm.update = function() {
+        alert(vm.dt2);
+    };
+
 	vm.editRow = RowEditor.editRow;
+
+	vm.project = {
+	    description: 'Nuclear Missile Defense System',
+	    rate: 500,
+	    special: true
+    };
+
+	vm.testStatus = [{id: 1, type: 'Yes' }, {id: 2, type: 'No' }];
+	vm.streams = [{id: 1, type: 'Java' }, {id: 2, type: 'QA' }];
+	vm.roles = [{id: 1, type: 'Lead' }, {id: 2, type: 'Developer' }];
+	vm.selectedRoles = vm.roles[0];
+	vm.selectedStream = "java";
+
 
 	vm.serviceGrid = {
 		enableRowSelection : true,
 		enableRowHeaderSelection : false,
+		enableColumnMenus: false,// remove sort icons
 		multiSelect : false,
-		enableSorting : true,
+		enableSorting : false,
 		enableFiltering : true,
 		enableGridMenu : true,
-		rowTemplate : "<div ng-dblclick=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
+		rowTemplate : "<div ng-click=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
 	};
 
 	vm.serviceGrid.columnDefs = [{
@@ -50,15 +99,10 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                     categoryDisplayName: 'Candidate',
                     width:"99",
                     displayName:"created"
-                },{
-                    field: 'drive_id',
-                    categoryDisplayName: 'Drive',
-                    width:"60",
-                    displayName:"id"
                 }, {
                     field: 'drive_date',
                     categoryDisplayName: 'Drive',
-                    width:"60",
+                    width:"90",
                     displayName:"date"
                 }, {
                     field: 'drive_name',
@@ -66,20 +110,23 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                     width:"99",
                     displayName:"name"
                 }, {
-                    field: 'testTypes_id',
+                    field: 'testTypes_mettal',
                     categoryDisplayName: 'Test Types',
-                    width:"50",
-                    displayName:"id"
+                    width:"70",
+                    displayName:"Meetal",
+                    enableFiltering: false // remove search filter from indv. entity
                 }, {
-                    field: 'testTypes_id_testTypesId',
+                    field: 'testTypes_miniPg',
                     categoryDisplayName: 'Test Types',
-                    width:"50",
-                    displayName:"T T Id"
+                    width:"70",
+                    displayName:"Mini PG",
+                    enableFiltering: false
                 }, {
-                    field: 'testTypes_test',
+                    field: 'testTypes_pg',
                     categoryDisplayName: 'Test Types',
-                    width:"120",
-                    displayName:"test"
+                    width:"70",
+                    displayName:"PG",
+                    enableFiltering: false
                 }, {
                     field: 'testTypes_score',
                     categoryDisplayName: 'Test Types',
@@ -91,21 +138,6 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                     width:"60",
                     displayName:"status"
                 },{
-                    field: 'testTypes_driveId',
-                    categoryDisplayName: 'Test Types',
-                    width:"50",
-                    displayName:"Drive Id"
-                }, {
-                    field: 'hiringStatus_userId',
-                    categoryDisplayName: 'Hiring Status',
-                    width:"70",
-                    displayName:"User Id"
-                }, {
-                    field: 'hiringStatus_driveId',
-                    categoryDisplayName: 'Hiring Status',
-                    width:"70",
-                    displayName:"Drive Id"
-                }, {
                     field: 'hiringStatus_status',
                     categoryDisplayName: 'Hiring Status',
                     width:"70",
@@ -152,7 +184,8 @@ function RowEditor($http, $rootScope, $modal) {
 				},
 				row : function() {
 					return row;
-				}
+				},
+
 			}
 		});
 	}
@@ -160,10 +193,88 @@ function RowEditor($http, $rootScope, $modal) {
 	return service;
 }
 
-function RowEditCtrl($http, $modalInstance, grid, row) {
+function RowEditCtrl($http, $modalInstance, $mdDateLocale, $filter, grid, row) {
 	var vm = this;
-	vm.entity = angular.copy(row.entity);
+	//vm.entity = angular.copy(row.entity);
 	vm.save = save;
+
+    $mdDateLocale.formatDate = function(date) {
+        return $filter('date')(vm.myDate, "dd-MM-yyyy");
+    };
+
+    vm.candidate = {
+        name : null,
+        email : null,
+        stream : null,
+        role : {id:1,type:'Lead'},
+        created : null
+    };
+
+        vm.testStatus = [{id: 1, type: 'Hold' }, {id: 2, type: 'Clear' }, {id: 3, type: 'Fail' }];
+        vm.hiringStatus= ['selected', 'rejected'];
+        vm.streams = [{id: 1, type: 'Java' }, {id: 2, type: 'QA' }];
+        vm.roles1 = [{'id':1,'type':'Lead'},{'id': 2,'type':'Developer'}];
+        vm.selectedRole = vm.roles1[1];
+        vm.selectedStream = "java";
+
+    vm.role = {id:1,type:'Lead'};
+    vm.stream = {id: 1, type: 'Java' };
+
+
+
+    vm.candidateCreated = new Date();
+
+    vm.minDate = new Date(
+        vm.candidateCreated.getFullYear()-1,
+        vm.candidateCreated.getMonth(),
+        vm.candidateCreated.getDate());
+
+    vm.maxDate = new Date(
+        vm.candidateCreated.getFullYear()+1,
+        vm.candidateCreated.getMonth(),
+        vm.candidateCreated.getDate());
+
+
+    vm.driveDate = angular.copy(vm.candidateCreated);
+
+    console.log(vm.candidateCreated);
+    console.log(vm.driveDate);
+    vm.Open = false;
+
+    /*vm.dt = new Date();
+    vm.dt2 = new Date();
+
+    vm.formatDate = function(theDate) {
+        var zeroPad = function(str) {
+            return ('0' + str).slice(-2);
+        };
+
+        var day = zeroPad(theDate.getDate());
+        var month = zeroPad(theDate.getMonth());
+        var year = theDate.getFullYear();
+
+        return [month, day, year].join('/');
+    };
+
+    vm.openC = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        vm.opened = true;
+    };
+
+    vm.open2 = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        vm.opened2 = true;
+    };
+
+    vm.update = function() {
+        alert(vm.dt2);
+    };*/
+
+
 	function save() {
 		if (row.entity.id == '0') {
 			/*
@@ -258,3 +369,14 @@ app.directive('categoryHeader', function() {
         };
     });
 
+
+app.config(function($mdDateLocaleProvider) {
+    $mdDateLocaleProvider.formatDate = function(date) {
+        return date ? moment(date).format('DD-MM-YYYY') : '';
+    };
+
+    $mdDateLocaleProvider.parseDate = function(dateString) {
+        var m = moment(dateString, 'DD-MM-YYYY', true);
+        return m.isValid() ? m.toDate() : new Date(NaN);
+    };
+});
