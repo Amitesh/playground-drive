@@ -1,7 +1,118 @@
+<style>
+    md-input-container:not(.md-input-invalid).md-input-has-value label {
+        color: rgb(129, 159, 193);
+    }
+</style>
+
 <div>
   <md-content layout-padding>
     <form name="projectForm">
-      <div layout="row">
+        <div layout="row">
+            <md-input-container flex="50">
+                <label>Canditate Name</label>
+                <input required name="candidateName" ng-model="vm.entity.canditate_name">
+                <div ng-messages="projectForm.candidateName.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Email Id</label>
+                <input required type="email" name="candidateEmail" ng-model="vm.entity.canditate_email"
+                       minlength="6" maxlength="30"
+                       ng-pattern="/\S+@\S+\.\S+/" />
+
+                <div ng-messages="projectForm.candidateEmail.$error" role="alert">
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                        Your email must be between 6 and 30 characters long and look like an e-mail address.
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+
+        <div layout="row">
+            <md-input-container flex="50">
+                <label>Candidate Stream</label>
+                <md-select name = "kukusdsd" ng-model="vm.entity.canditate_stream" aria-label="Select" >
+                    <md-option  ng-value="role.type" ng-repeat="role in vm.streams"><span>{{role.type}}</span></md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex="50">
+                <label>Candidate Role</label>
+                <md-select name = "kukusdsd" ng-model="vm.entity.canditate_role" aria-label="Select" >
+                    <md-option  ng-value="role.type" ng-repeat="role in vm.roles1"><span>{{role.type}}</span></md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout="row">
+            <md-input-container flex="60">
+                <label>Drive Name</label>
+                <input required name="driveName" ng-model="vm.entity.drive_name">
+                <div ng-messages="projectForm.driveName.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="30">
+                <div flex-gt-xs>
+                    <label>Drive Date</label>
+                    <md-datepicker ng-model="vm.driveDate" md-placeholder="Enter date"></md-datepicker>
+                </div>
+            </md-input-container>
+        </div>
+
+        <div layout="row">
+            <md-input-container flex="20">
+                <label>TestType: Meetal</label>
+                <md-select name="meetaltestStatus" ng-model="vm.entity.meetalTestStatus">
+                    <md-option value="No">No</md-option>
+                    <md-option value="Yes">Yes</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex="20">
+                <label>TestType: MiniPg</label>
+                <md-select name="minipgTestStatus" ng-model="vm.entity.minipgTestStatus">
+                    <md-option value="No">No</md-option>
+                    <md-option value="Yes">Yes</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex="20">
+                <label>TestType: Pg</label>
+                <md-select name="pgTestStatus" ng-model="vm.entity.pgTestStatus">
+                    <md-option value="No">No</md-option>
+                    <md-option value="Yes">Yes</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex="20">
+                <label>Score</label>
+                <input required name="driveName" ng-model="vm.entity.testTypes_score">
+                <div ng-messages="projectForm.driveName.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="20">
+                <label>Test Status</label>
+                <md-select name = "kukusddsd" ng-model="vm.entity.testTypes_status" aria-label="Select" >
+                    <md-option  ng-value="status" ng-repeat="status in vm.testStatus"><span>{{status}}</span></md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-input-container flex="30">
+                <label>HiringStatus</label>
+                <md-select name = "kukusdsd" ng-model="vm.entity.hiringStatus_status" aria-label="Select" >
+                    <md-option ng-value="status" ng-repeat="status in vm.hiringStatus"><span>{{status}}</span></md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex="65">
+                <label>Comments</label>
+                <input required name="comments" ng-model="vm.entity.hiringStatus_comment">
+                <div ng-messages="projectForm.comments.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+        </div>
+<!--      <div layout="row">
         <md-input-container flex="50">
           <label>Canditate Name</label>
           <input required name="candidateName" ng-model="vm.candidate.name">
@@ -113,7 +224,7 @@
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
-        </div>
+        </div>-->
     </form>
   </md-content>
     <div class="modal-footer">

@@ -18,7 +18,6 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
 
     vm.candidate = {id:200};
 
-	vm.testStatus = [{id: 1, type: 'Yes' }, {id: 2, type: 'No' }];
 	vm.streams = [{id: 1, type: 'Java' }, {id: 2, type: 'QA' }];
 	vm.roles = [{id: 1, type: 'Lead' }, {id: 2, type: 'Developer' }];
 	vm.selectedRoles = vm.roles[0];
@@ -36,12 +35,13 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
 		rowTemplate : "<div ng-click=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
 	};
 
-	vm.serviceGrid.columnDefs = [{
+	vm.serviceGrid.columnDefs = [
+                /*{
                     field: 'canditate.id',
                     categoryDisplayName: 'Candidate',
                     width:"40",
                     displayName:"id"
-                }, {
+                },*/ {
                     field: 'canditate_name',
                     categoryDisplayName: 'Candidate',
                     width:"99",
@@ -62,11 +62,6 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                     width:"60",
                     displayName:"role"
                 }, {
-                    field: 'canditate_created',
-                    categoryDisplayName: 'Candidate',
-                    width:"99",
-                    displayName:"created"
-                }, {
                     field: 'drive_date',
                     categoryDisplayName: 'Drive',
                     width:"90",
@@ -77,23 +72,20 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                     width:"99",
                     displayName:"name"
                 }, {
-                    field: 'testTypes_mettal',
+                    field: 'meetalTestStatus',
                     categoryDisplayName: 'Test Types',
                     width:"70",
-                    displayName:"Meetal",
-                    enableFiltering: false // remove search filter from indv. entity
+                    displayName:"Meetl"
                 }, {
-                    field: 'testTypes_miniPg',
+                    field: 'minipgTestStatus',
                     categoryDisplayName: 'Test Types',
-                    width:"70",
-                    displayName:"Mini PG",
-                    enableFiltering: false
+                    width:"80",
+                    displayName:"Mini PG"
                 }, {
-                    field: 'testTypes_pg',
+                    field: 'pgTestStatus',
                     categoryDisplayName: 'Test Types',
                     width:"70",
-                    displayName:"PG",
-                    enableFiltering: false
+                    displayName:"PG"
                 }, {
                     field: 'testTypes_score',
                     categoryDisplayName: 'Test Types',
@@ -172,12 +164,12 @@ function RowEditCtrl($http, $modalInstance,  grid, row) {
         created : null
     };
 
-        vm.testStatus = [{id: 1, type: 'Hold' }, {id: 2, type: 'Clear' }, {id: 3, type: 'Fail' }];
-        vm.hiringStatus= ['selected', 'rejected'];
-        vm.streams = [{id: 1, type: 'Java' }, {id: 2, type: 'QA' }];
-        vm.roles1 = [{'id':1,'type':'Lead'},{'id': 2,'type':'Developer'}];
-        vm.selectedRole = vm.roles1[1];
-        vm.selectedStream = "java";
+    vm.testStatus = ['Hold','clear','Fail'];
+    vm.hiringStatus= ['selected', 'rejected'];
+    vm.streams = [{id: 1, type: 'Java' }, {id: 2, type: 'QA' },{id: 1, type: 'WebUI' }, {id: 2, type: 'Archi' },{id: 1, type: 'manager' }, {id: 2, type: 'Testing' }, {id: 2, type: 'Marketing' }];
+    vm.roles1 = [{'id':1,'type':'Lead'},{'id': 2,'type':'Developer'},{'id':1,'type':'Junior Engg'},{'id': 2,'type':'Archi'},{'id':1,'type':'Senior Engg'},{'id': 2,'type':'Archi'}];
+    vm.selectedRole = vm.roles1[1];
+    vm.selectedStream = "java";
 
     vm.role = {id:1,type:'Lead'};
     vm.stream = {id: 1, type: 'Java' };
