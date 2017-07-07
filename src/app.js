@@ -2,37 +2,37 @@
 
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
-import angularModalService from 'angular-modal-service';
+import angularAnimate from 'angular-animate';
+import angularMaterial from 'angular-material';
 
+import 'angular-material/angular-material.scss';
 import './style.scss';
 
 if (module.hot) {
-  module.hot.accept()
+    module.hot.accept()
 }
 
-console.log(angularModalService.name);
 import navigationComponent from './components/navigation/navigation';
 import dashboardModule from './components/dashboard/index';
 import headerComponent from './components/header';
 import candidateComponent from './components/candidate';
 import appComponent from './components/app/app.component';
 import metaInfoService from './services/meta-info.service';
-
-import candidatePopup from './components/candidate/candidate-popup.html'
+import candidatePopup from './components/candidate/candidate-popup.html';
 import candidateController from './components/candidate/candidate.controller';
 
 
 let interviewDriveApp = angular.module('idriveApp', [
     uirouter,
-    'angularModalService',
+    angularAnimate,
+    angularMaterial,
     dashboardModule,
     navigationComponent,
     headerComponent,
     candidateComponent
 ]);
 
-interviewDriveApp.config(function($urlRouterProvider, $locationProvider, $stateProvider
-                                  ) {
+interviewDriveApp.config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
     'ngInject';
 
     // $locationProvider.html5Mode(true);
@@ -52,21 +52,20 @@ interviewDriveApp.config(function($urlRouterProvider, $locationProvider, $stateP
         .state('app.dashboard.candidate', {
             url: '/candidate/add-edit',
             views: {'candidate-modal': {}},
-            onEnter: function($state, ModalService){
+
+            onEnter: function ($state, $mdDialog) {
                 'ngInject';
 
-                ModalService.showModal({
+                // var items = [1, 2, 3];
+
+                $mdDialog.show({
                     template: candidatePopup,
-                    controller: candidateController
-                }).then(function (modal) {
-                    if (modal.element.modal) {
-                        modal.element.modal();
-                    } else {
-                        $(modal.element).modal('show');
-                    }
-                    modal.close.then(function (result) {
-                        $state.go('app.dashboard');
-                    });
+
+                    // locals: {
+                    //     items: items
+                    // },
+                    controller: candidateController,
+                    controllerAs: 'vm'
                 });
             }
         });

@@ -14,7 +14,7 @@ const config = {
     entry: {
         app: './app.js',
         admin: './admin.js',
-        vendor: ['jquery', 'bootstrap', 'angular']
+        vendor: ['jquery', 'bootstrap', 'angular', 'moment']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -52,7 +52,12 @@ const config = {
         }, {
             test: /\.(eot|ttf|wav|mp3)$/,
             loader: 'file-loader',
-        }
+        },
+            {
+                test: [/fontawesome-webfont\.svg/, /fontawesome-webfont\.eot/, /fontawesome-webfont\.ttf/,
+                    /fontawesome-webfont\.woff/, /fontawesome-webfont\.woff2/],
+                loader: 'file?name=fonts/[name].[ext]'
+            }
         ]
     },
     plugins: [
