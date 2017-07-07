@@ -200,22 +200,12 @@ function RowEditCtrl($http, $mdDialog,  grid, row) {
 
 
 	function save() {
-		if (row.entity.id == '0') {
-			/*
-			 * $http.post('http://localhost:8080/service/save', row.entity).success(function(response) { $modalInstance.close(row.entity); }).error(function(response) { alert('Cannot edit row (error in console)'); console.dir(response); });
-			 */
-			row.entity = angular.extend(row.entity, vm.entity);
-			//real ID come back from response after the save in DB
-			row.entity.id = Math.floor(100 + Math.random() * 1000);
-			
-			grid.data.push(row.entity);
 
-		} else {
 			row.entity = angular.extend(row.entity, vm.entity);
+            console.log(row.entity);
 			/*
 			 * $http.post('http://localhost:8080/service/save', row.entity).success(function(response) { $modalInstance.close(row.entity); }).error(function(response) { alert('Cannot edit row (error in console)'); console.dir(response); });
 			 */
-		}
 		//$modalInstance.close(row.entity);
         $mdDialog.hide();
 	}
