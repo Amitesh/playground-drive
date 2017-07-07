@@ -6,11 +6,6 @@ import angularModalService from 'angular-modal-service';
 
 import './style.scss';
 
-
-//
-// import {groupBy} from 'lodash/collection'
-// import people from './data/people'
-
 if (module.hot) {
   module.hot.accept()
 }
@@ -19,15 +14,21 @@ console.log(angularModalService.name);
 import navigationComponent from './components/navigation/navigation';
 import dashboardModule from './components/dashboard/index';
 import headerComponent from './components/header';
+import candidateComponent from './components/candidate';
 import appComponent from './components/app/app.component';
 import metaInfoService from './services/meta-info.service';
+
+import candidatePopup from './components/candidate/candidate-popup.html'
+import candidateController from './components/candidate/candidate.controller';
+
 
 let interviewDriveApp = angular.module('idriveApp', [
     uirouter,
     'angularModalService',
     dashboardModule,
     navigationComponent,
-    headerComponent
+    headerComponent,
+    candidateComponent
 ]);
 
 interviewDriveApp.config(function($urlRouterProvider, $locationProvider, $stateProvider
@@ -47,12 +48,34 @@ interviewDriveApp.config(function($urlRouterProvider, $locationProvider, $stateP
         .state('app.dashboard', {
             url: '/dashboard',
             template: '<dashboard></dashboard>'
+        })
+        .state('app.dashboard.candidate', {
+            url: '/candidate/add-edit',
+            views: {'candidate-modal': {}},
+            onEnter: function($state, ModalService){
+                'ngInject';
+
+                ModalService.showModal({
+                    template: candidatePopup,
+                    controller: candidateController
+                }).then(function (modal) {
+                    if (modal.element.modal) {
+                        modal.element.modal();
+                    } else {
+                        $(modal.element).modal('show');
+                    }
+                    modal.close.then(function (result) {
+                        $state.go('app.dashboard');
+                    });
+                });
+            }
         });
 
     $urlRouterProvider.otherwise('/app/dashboard');
 });
 interviewDriveApp.component('app', appComponent);
 interviewDriveApp.service('MetaInfoService', metaInfoService);
+
 
 // interviewDriveApp.run(function(){
 //     angular.bootstrap(document, ['idriveApp']);
