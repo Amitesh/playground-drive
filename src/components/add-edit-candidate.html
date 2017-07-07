@@ -1,0 +1,22 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add Candidate</h4>
+            </div>
+            <div class="modal-body">
+                <form class="candidate-form">
+                    <input type="text" placeholder="First name" name="firstname"><br>
+                    <input type="text" placeholder="Last name" name="lastname"><br>
+                    <input type="text" placeholder="Email" name="email"><br>
+                    <input type="text" placeholder="Phone" name="phone"><br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="save()" class="btn btn-default" data-dismiss="modal">Save</button>
+                <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

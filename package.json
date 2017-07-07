@@ -29,9 +29,12 @@
   },
   "dependencies": {
     "angular": "^1.6.5",
+    "angular-modal-service": "^0.12.1",
     "angular-ui-router": "^1.0.3",
+    "bootstrap": "^3.3.7",
     "bulma": "^0.4.3",
     "d3": "^4.9.1",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4"
   }
 }

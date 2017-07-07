@@ -4,15 +4,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const extractCSS = new ExtractTextPlugin('[name].bundle.css')
 
 const extractCommons = new webpack.optimize.CommonsChunkPlugin({
-    name: 'commons',
-    filename: 'commons.js'
+    name: ['commons', 'vendor'],
+    filename: 'commons.js',
+    minChunks: Infinity
 })
 
 const config = {
     context: path.resolve(__dirname, 'src'),
     entry: {
         app: './app.js',
-        admin: './admin.js'
+        admin: './admin.js',
+        vendor: ['jquery', 'bootstrap', 'angular']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -44,13 +46,23 @@ const config = {
         }, {
             test: /\.html$/,
             loader: "html-loader"
+        }, {
+            test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+            loader: 'url-loader?limit=10000',
+        }, {
+            test: /\.(eot|ttf|wav|mp3)$/,
+            loader: 'file-loader',
         }
         ]
     },
     plugins: [
         extractCommons,
         extractCSS,
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ],
     devtool: "#inline-source-map"
 }

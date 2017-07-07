@@ -1,13 +1,11 @@
-export default function dashboardController($scope, $http){
+export default function dashboardController($scope, $http, MetaInfoService){
     'ngInject';
 
-    let vm = $scope;
+    let vm = this;
 
-    $http.get('http://localhost:3000/meta-info')
-        .then(function successCallback(response) {
-            console.log('success response =>', response.data);
-        }, function errorCallback(response) {
-            console.log('Failure response =>', response);
-        });
-
+    MetaInfoService.getInfo().then(function success(info){
+        console.log('in success ', info);
+    }, function failure(error){
+        console.log('in failure ', error);
+    });
 }
