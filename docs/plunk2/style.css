@@ -36,6 +36,12 @@ md-input-container:not(.md-input-invalid).md-input-has-value label {
 .grid, .rowgroup, .ui-grid-header-canvas, .ui-grid-header-viewport, .ui-grid-top-panel{
 	width:auto!important;
 }
+.grid-tooltip {
+  overflow: visible;
+  z-index: 9999999;
+  float: left;
+  margin-left:-60px;
+}
 
 div.block{
   overflow:hidden;

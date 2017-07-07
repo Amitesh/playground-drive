@@ -48,6 +48,7 @@ function MainCtrl($scope, $http, $modal, $timeout, RowEditor, uiGridConstants) {
                     displayName:"name"
                 }, {
                     field: 'canditate_email',
+                    cellTemplate: 'name-template.html',
                     categoryDisplayName: 'Candidate',
                     width:"60",
                     displayName:"email"
