@@ -2,7 +2,40 @@ export default function candidateController($state, $scope, $mdDialog, MetaInfoS
     'ngInject';
 
     $scope.data = {};
-    $scope.selectedData = { candidate: {}, drive: {}, tests: [], hiringStatus: {}};
+    $scope.candidateFormData = {
+        candidate: {
+            id: null,
+            firstname: null,
+            lastname: null,
+            email: null,
+            phone: null,
+            stream: null,
+            role: null
+        },
+        drivesCandidate: {
+            id: null,
+            participated: null,
+            driveId: null,
+            candidateId: null
+        },
+        tests: [
+            {
+                id: null,
+                participated: null,
+                score: null,
+                status: null,
+                testTypeId: null,
+                drivesCandidateId: null
+            }
+        ],
+        hiringStatus: {
+            id: null,
+            status: null,
+            comment: null,
+            userId: null,
+            drivesCandidateId: null
+        }
+    };
 
     MetaInfoService.getInfo().then(function success(info){
         console.log('in success ', info);
@@ -18,7 +51,7 @@ export default function candidateController($state, $scope, $mdDialog, MetaInfoS
     }
 
     $scope.save = function () {
-        console.log($scope.selectedData);
+        console.log($scope.candidateFormData);
         // closeDialog();
     };
     $scope.cancel = function () {
