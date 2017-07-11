@@ -4,8 +4,10 @@ import angular from 'angular';
 import uirouter from 'angular-ui-router';
 import angularAnimate from 'angular-animate';
 import angularMaterial from 'angular-material';
+import angularUIGrid from 'angular-ui-grid';
 
 import 'angular-material/angular-material.scss';
+import 'angular-ui-grid/ui-grid.css';
 import './style.scss';
 
 if (module.hot) {
@@ -27,6 +29,7 @@ let interviewDriveApp = angular.module('idriveApp', [
     uirouter,
     angularAnimate,
     angularMaterial,
+    angularUIGrid,
     dashboardModule,
     navigationComponent,
     headerComponent,

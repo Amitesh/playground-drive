@@ -35,7 +35,7 @@ const config = {
                 }
             }]
         }, {
-            test: /\.scss$/,
+            test: /\.scss|\.css$/,
             loader: ['style-loader', 'css-loader', 'sass-loader'] /*extractCSS.extract(['css-loader','sass-loader'])*/
         }, {
             test: /\.(png|jpg)$/,
