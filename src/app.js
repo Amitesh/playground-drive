@@ -17,10 +17,11 @@ import dashboardModule from './components/dashboard/index';
 import headerComponent from './components/header';
 import candidateComponent from './components/candidate';
 import appComponent from './components/app/app.component';
-import metaInfoService from './services/meta-info.service';
 import candidatePopup from './components/candidate/candidate-popup.html';
 import candidateController from './components/candidate/candidate.controller';
 
+import metaInfoService from './services/meta-info.service';
+import candidateService from './services/candidate.service';
 
 let interviewDriveApp = angular.module('idriveApp', [
     uirouter,
@@ -74,6 +75,7 @@ interviewDriveApp.config(function ($urlRouterProvider, $locationProvider, $state
 });
 interviewDriveApp.component('app', appComponent);
 interviewDriveApp.service('MetaInfoService', metaInfoService);
+interviewDriveApp.service('CandidateService', candidateService);
 
 
 // interviewDriveApp.run(function(){

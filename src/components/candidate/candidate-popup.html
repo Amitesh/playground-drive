@@ -94,11 +94,14 @@
                 <!--<md-content flex="30">Score</md-content>-->
                 <!--<md-content flex="30">Status</md-content>-->
                 <!--</div>-->
-                <div layout="row">
-                    <md-content flex="10">Mettl</md-content>
+                <div layout="row" ng-repeat="test in data.testTypes">
+                    <md-content flex="10">{{test.name}}</md-content>
                     <md-input-container flex="30">
                         <label>Participated</label>
-                        <md-select name="test0-participated" ng-model="candidateFormData.tests[0].participated">
+                        <input type="hidden" name="test{{test.id}}-testTypeId"
+                               ng-model="candidateFormData.tests[$index].testTypeId"
+                               value="{{test.id}}" ng-init="candidateFormData.tests[$index].testTypeId=test.id">
+                        <md-select name="test{{test.id}}-participated" ng-model="candidateFormData.tests[$index].participated">
                             <md-option ng-value="p" ng-repeat="p in data.metaInfo.participated">
                                 <span>{{p}}</span>
                             </md-option>
@@ -106,17 +109,19 @@
                     </md-input-container>
                     <md-input-container flex="30">
                         <label>Score</label>
-                        <input name="test0-score" ng-model="candidateFormData.tests[0].score">
+                        <input name="test{{test.id}}-score" ng-model="candidateFormData.tests[$index].score">
                     </md-input-container>
                     <md-input-container flex="30">
                         <label>Status</label>
-                        <md-select name="test0-status" ng-model="candidateFormData.tests[0].status">
+                        <md-select name="test{{test.id}}-status" ng-model="candidateFormData.tests[$index].status">
                             <md-option ng-value="s" ng-repeat="s in data.metaInfo.status">
                                 <span>{{s}}</span>
                             </md-option>
                         </md-select>
                     </md-input-container>
                 </div>
+
+                <!--
                 <div layout="row">
                     <md-content flex="10">Mini PG</md-content>
                     <md-input-container flex="30">
@@ -163,7 +168,7 @@
                         </md-select>
                     </md-input-container>
                 </div>
-
+                -->
 
                 <div class="hd">Hiring status</div>
                 <md-divider></md-divider>
