@@ -33,6 +33,8 @@ let interviewDriveApp = angular.module('idriveApp', [
     angularMaterial,
     angularUIGrid,
     'ui.grid.selection',
+    'ui.grid.exporter',
+    'ui.grid.moveColumns',
     uiGridAutoFitColumns,
     dashboardModule,
     navigationComponent,

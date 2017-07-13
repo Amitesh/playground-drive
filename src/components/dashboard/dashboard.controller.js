@@ -173,5 +173,12 @@ export default function dashboardController($scope, $http, $state, DashboardServ
         console.log('in failure ', error);
     });
 
+    $scope.refresh = function(){
+        $state.go('app.dashboard', {}, {reload: true});
+    };
 
+    $scope.export = function(){
+        var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
+        $scope.gridApi.exporter.csvExport( /* row */ 'visible',  'all', myElement );
+    }
 }
