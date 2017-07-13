@@ -1,3 +1,5 @@
+import config from '../config.json';
+
 export default class MetaInfoService {
     constructor($http, $q) {
         'ngInject';
@@ -24,7 +26,7 @@ export default class MetaInfoService {
         if(this.fetched){
             deferred.resolve(me.data);
         }else{
-            this.$http.get('http://localhost:3000/meta-info')
+            this.$http.get(config.apiUrl + '/meta-info')
                 .then(function success(res){
                     me.fetched = true;
                     me.data = res.data;

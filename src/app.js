@@ -24,6 +24,7 @@ import candidateController from './components/candidate/candidate.controller';
 
 import metaInfoService from './services/meta-info.service';
 import candidateService from './services/candidate.service';
+import dashboardService from './services/dashboard.service';
 
 let interviewDriveApp = angular.module('idriveApp', [
     uirouter,
@@ -79,6 +80,7 @@ interviewDriveApp.config(function ($urlRouterProvider, $locationProvider, $state
 interviewDriveApp.component('app', appComponent);
 interviewDriveApp.service('MetaInfoService', metaInfoService);
 interviewDriveApp.service('CandidateService', candidateService);
+interviewDriveApp.service('DashboardService', dashboardService);
 
 
 // interviewDriveApp.run(function(){

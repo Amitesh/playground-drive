@@ -1,3 +1,5 @@
+import config from '../config.json';
+
 export default class CandidateService {
     constructor($http, $q) {
         'ngInject';
@@ -10,6 +12,6 @@ export default class CandidateService {
     }
 
     saveAll(data) {
-        return this.$http.post('http://localhost:3000/candidate/create-with-drive', data);
+        return this.$http.post(config.apiUrl + '/candidate/create-with-drive', data);
     }
 }
