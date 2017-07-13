@@ -1,9 +1,10 @@
-export default function candidateController($state, $scope, $parse, $mdDialog,
-                                            MetaInfoService, CandidateService) {
+export default function candidateController($state, $scope, $parse, $mdDialog, $timeout,
+                                            MetaInfoService, CandidateService, DashboardService) {
     'ngInject';
 
+    var entity = angular.copy( DashboardService.getSelectedRow() ? (DashboardService.getSelectedRow().entity || {} ): {});
     $scope.data = {};
-    $scope.candidateFormData = {
+    $scope.candidateFormData = angular.extend({
         candidate: {
             id: null,
             firstname: null,
@@ -36,61 +37,36 @@ export default function candidateController($state, $scope, $parse, $mdDialog,
             userId: null,
             drivesCandidateId: null
         }
-    };
+    }, entity);
 
-    // $scope.propertify = function (string) {
-    //     var p = $parse(string);
-    //     var s = p.assign;
-    //     return function (newVal) {
-    //         if (newVal) {
-    //             s($scope, newVal);
-    //         }
-    //         return p($scope);
-    //     };
-    // };
-
+    console.log('$scope.candidateFormData =>', $scope.candidateFormData);
 
     MetaInfoService.getInfo().then(function success(info) {
-        console.log('in success ', info);
         $scope.data = info;
     }, function failure(error) {
         console.log('in failure ', error);
     });
 
-    function closeDialog() {
-        console.log('closing dialog')
+    function closeDialog(isReload) {
         $mdDialog.hide();
-        $state.go('^');
+        $state.go('app.dashboard', {}, {reload: isReload});
     }
 
     $scope.save = function () {
-        console.log($scope.candidateFormData);
-        // $scope.candidateFormData = formatPostData($scope.candidateFormData);
-        CandidateService.saveAll($scope.candidateFormData).then(function(res){
-            console.log('saved');
-        }, function(){
-            console.error('not saved');
-        });
-        // closeDialog();
+        if($scope.candidateFormData.candidate.firstname) {
+            CandidateService.saveAll($scope.candidateFormData).then(function (res) {
+                $('.notice-board').html('<span class="green">' + $scope.candidateFormData.candidate.firstname + '\'s record has been saved.</span>');
+                $timeout(function () {
+                    closeDialog(true)
+                }, 500);
+            }, function () {
+                console.error('not saved');
+            });
+        }
     };
 
     $scope.cancel = function () {
         closeDialog();
+        DashboardService.setSelectedRow(null);
     };
-
-    function formatPostData(data){
-        var t = angular.copy(data.tests);
-        var tt = [];
-
-        angular.forEach(t, function(v, k){
-            if(v){
-                v.id = k;
-                tt.push(v);
-            }
-        });
-
-        data.tests = tt;
-
-        return data;
-    }
 }

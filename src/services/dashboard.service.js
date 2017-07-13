@@ -6,6 +6,7 @@ export default class DashboardService {
 
         this.$http = $http;
         this.$q = $q;
+        this.selectedRow;
     }
 
     get() {
@@ -21,5 +22,13 @@ export default class DashboardService {
                 deferred.reject(res);
             });
         return deferred.promise;
+    }
+
+    setSelectedRow(row){
+        this.selectedRow = row;
+    }
+
+    getSelectedRow(){
+        return this.selectedRow;
     }
 }

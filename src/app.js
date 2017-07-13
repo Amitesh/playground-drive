@@ -5,6 +5,7 @@ import uirouter from 'angular-ui-router';
 import angularAnimate from 'angular-animate';
 import angularMaterial from 'angular-material';
 import angularUIGrid from 'angular-ui-grid';
+import uiGridAutoFitColumns from 'ui-grid-auto-fit-columns';
 
 import 'angular-material/angular-material.scss';
 import 'angular-ui-grid/ui-grid.css';
@@ -31,6 +32,8 @@ let interviewDriveApp = angular.module('idriveApp', [
     angularAnimate,
     angularMaterial,
     angularUIGrid,
+    'ui.grid.selection',
+    uiGridAutoFitColumns,
     dashboardModule,
     navigationComponent,
     headerComponent,
@@ -58,10 +61,10 @@ interviewDriveApp.config(function ($urlRouterProvider, $locationProvider, $state
             url: '/candidate/add-edit',
             views: {'candidate-modal': {}},
 
-            onEnter: function ($state, $mdDialog) {
+            onEnter: function ($state, $stateParams, $mdDialog, DashboardService) {
                 'ngInject';
 
-                // var items = [1, 2, 3];
+                console.log('$state =>', DashboardService.getSelectedRow());
 
                 $mdDialog.show({
                     template: candidatePopup,

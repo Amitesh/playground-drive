@@ -1,9 +1,13 @@
 <div>
     <div>
-        <h3>Candidate List</h3>
+        <h3 class="drive-title">Drive List</h3>
     </div>
     <div>
-        <div id="candidate-drive-grid" ui-grid="vm.grid" class="dashboard-ui-grid"></div>
+        <div id="candidate-drive-grid" ui-grid="grid"
+             ui-grid-auto-fit-columns
+             ui-grid-selection
+             ui-grid-resize-columns
+             class="dashboard-ui-grid"></div>
     </div>
     <candidate></candidate>
 </div>
