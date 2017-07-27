@@ -14,7 +14,8 @@ export default function dashboardController($scope, $http, $state, DashboardServ
         enableFiltering: true,
         enableGridMenu: false,
         enableColumnResize: true,
-        noUnselect: true
+        noUnselect: true,
+        rowHeight: 100
     };
 
     $scope.grid.onRegisterApi = function (gridApi) {
@@ -60,106 +61,175 @@ export default function dashboardController($scope, $http, $state, DashboardServ
         {
             field: 'drive.name',
             superCol: 'drive',
-            displayName: "Name"
+            displayName: "Name",
+            cellTooltip: function (row) {
+                return row.entity.drive.name + ' on ' + row.entity.drive.scheduledOn;
+            },
+            cellTemplate: '<div class="ui-grid-cell-contents drive left-gap" title="TOOLTIP">' +
+                    '<span class="name">{{row.entity.drive.name}}</span><br>' +
+                    '<span class="scheduled-on">{{row.entity.drive.scheduledOn}}</span>' +
+                '</div>'
         },
+        // {
+        //     field: 'drive.scheduledOn',
+        //     superCol: 'drive',
+        //     displayName: "Scheduled On"
+        // },
         {
-            field: 'drive.scheduledOn',
+            field: 'drive.participated',
             superCol: 'drive',
-            displayName: "Scheduled On"
+            displayName: "Came",
+            cellTemplate: '<div class="ui-grid-cell-contents drive text-center" title="TOOLTIP">' +
+                '<span class="participated">{{row.entity.drive.participated}}</span>'+
+            '</div>'
         },
         // Candidate Details
         {
             field: 'candidate.firstname',
             superCol: 'candidate',
-            displayName: "First name"
+            displayName: "Name",
+            width: '*',
+            cellTooltip: function (row) {
+                var tip = row.entity.candidate.firstname + ' ' + row.entity.candidate.lastname;
+                tip = tip + (row.entity.candidate.email ? '\n' + row.entity.candidate.email : '');
+                tip = tip + (row.entity.candidate.phone ? '\n' + row.entity.candidate.phone : '');
+
+                return tip;
+            },
+            cellTemplate: '<div class="ui-grid-cell-contents candidate left-gap" title="TOOLTIP">' +
+                    '<span class="name">{{row.entity.candidate.firstname}} {{row.entity.candidate.lastname}}</span><br>' +
+                    '<span class="email"><a href="mailto:{{row.entity.candidate.email}}">{{row.entity.candidate.email}}</a></span><br>' +
+                    '<span class="phone">{{row.entity.candidate.phone}}</span>' +
+                '</div>'
         },
-        {
-            field: 'candidate.lastname',
-            superCol: 'candidate',
-            displayName: "Last name"
-        },
-        {
-            field: 'candidate.email',
-            superCol: 'candidate',
-            displayName: "Email"
-        },
-        {
-            field: 'candidate.phone',
-            superCol: 'candidate',
-            displayName: "Phone"
-        },
+        // {
+        //     field: 'candidate.lastname',
+        //     superCol: 'candidate',
+        //     displayName: "Last name"
+        // },
+        // {
+        //     field: 'candidate.email',
+        //     superCol: 'candidate',
+        //     displayName: "Email"
+        // },
+        // {
+        //     field: 'candidate.phone',
+        //     superCol: 'candidate',
+        //     displayName: "Phone"
+        // },
         {
             field: 'candidate.stream',
             superCol: 'candidate',
-            displayName: "Stream"
+            displayName: "Stream",
+            cellTemplate: '<div class="ui-grid-cell-contents candidate text-center" title="TOOLTIP">' +
+            '<span class="stream">{{row.entity.candidate.stream}}</span>'+
+            '</div>'
         },
         {
             field: 'candidate.role',
             superCol: 'candidate',
-            displayName: "Role"
+            displayName: "Role",
+            width: '90',
+            cellTemplate: '<div class="ui-grid-cell-contents candidate text-center" title="TOOLTIP">' +
+            '<span class="role">{{row.entity.candidate.role}}</span>'+
+            '</div>'
         },
 
         // Mettl test detail
         {
-            field: 'tests[0].participated',
+            field: 'tests[0].score',
             superCol: 'tests[0]',
-            displayName: "Participated"
+            displayName: "Score",
+            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
+            '<span class="score">{{row.entity.tests[0].score}}</span>'+
+            '</div>'
         },
         {
             field: 'tests[0].status',
             superCol: 'tests[0]',
-            displayName: "Status"
+            displayName: "Status",
+            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
+            '<span class="status">{{row.entity.tests[0].status}}</span>'+
+            '</div>'
         },
         {
-            field: 'tests[0].score',
+            field: 'tests[0].participated',
             superCol: 'tests[0]',
-            displayName: "Score"
+            displayName: "Given",
+            cellTemplate: '<div class="ui-grid-cell-contents test  text-center" title="TOOLTIP">' +
+            '<span class="participated">{{row.entity.tests[0].participated}}</span>'+
+            '</div>'
         },
 
         // Mini PG test detail
         {
             field: 'tests[1].participated',
             superCol: 'tests[1]',
-            displayName: "Participated"
+            displayName: "Given",
+            cellTemplate: '<div class="ui-grid-cell-contents test  text-center" title="TOOLTIP">' +
+            '<span class="participated">{{row.entity.tests[1].participated}}</span>'+
+            '</div>'
         },
         {
             field: 'tests[1].status',
             superCol: 'tests[1]',
-            displayName: "Status"
+            displayName: "Status",
+            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
+            '<span class="status">{{row.entity.tests[1].status}}</span>'+
+            '</div>'
         },
         {
             field: 'tests[1].score',
             superCol: 'tests[1]',
-            displayName: "Score"
+            displayName: "Score",
+            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
+            '<span class="score">{{row.entity.tests[1].score}}</span>'+
+            '</div>'
         },
 
         // PG test detail
         {
             field: 'tests[2].participated',
             superCol: 'tests[2]',
-            displayName: "Participated"
+            displayName: "Given",
+            cellTemplate: '<div class="ui-grid-cell-contents test  text-center" title="TOOLTIP">' +
+            '<span class="participated">{{row.entity.tests[2].participated}}</span>'+
+            '</div>'
         },
         {
             field: 'tests[2].status',
             superCol: 'tests[2]',
-            displayName: "Status"
+            displayName: "Status",
+            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
+            '<span class="status">{{row.entity.tests[2].status}}</span>'+
+            '</div>'
         },
         {
             field: 'tests[2].score',
             superCol: 'tests[2]',
-            displayName: "Score"
+            displayName: "Score",
+            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
+            '<span class="score">{{row.entity.tests[2].score}}</span>'+
+            '</div>'
         },
 
         // Hiring Status
         {
             field: 'hiringStatus.status',
             superCol: 'hiring-status',
-            displayName: "Status"
+            displayName: "Status",
+            cellTemplate: '<div class="ui-grid-cell-contents hiring-status text-center" title="TOOLTIP">' +
+            '<span class="status">{{row.entity.hiringStatus.status}}</span>'+
+            '</div>'
         },
         {
             field: 'hiringStatus.comment',
             superCol: 'hiring-status',
-            displayName: "Comment"
+            displayName: "Comment",
+            width: '*',
+            cellTemplate: '<div class="ui-grid-cell-contents hiring-status left-gap" title="TOOLTIP">' +
+            '<span class="comment">{{row.entity.hiringStatus.comment}}</span>'+
+            '</div>'
         }
     ];
 

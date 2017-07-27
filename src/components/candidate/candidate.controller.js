@@ -53,6 +53,7 @@ export default function candidateController($state, $scope, $parse, $mdDialog, $
     }
 
     $scope.save = function () {
+        // Todo : add validation
         if($scope.candidateFormData.candidate.firstname) {
             CandidateService.saveAll($scope.candidateFormData).then(function (res) {
                 $('.notice-board').html('<span class="green">' + $scope.candidateFormData.candidate.firstname + '\'s record has been saved.</span>');

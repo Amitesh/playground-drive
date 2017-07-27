@@ -1,49 +1,53 @@
 //@import '~bulma';
-
 @import '~bootstrap/dist/css/bootstrap.css';
 
 /* For float */
 .float-left {
-  float: left; }
+  float: left;
+}
 
 .float-right {
-  float: right; }
+  float: right;
+}
 
 .float-clear {
   clear: both;
-  height: 1px; }
+  height: 1px;
+}
 
 /* For modern browsers */
 .float-clearfix:before,
 .float-clearfix:after {
   content: "";
-  display: table; }
+  display: table;
+}
 
 .float-clearfix:after {
-  clear: both; }
+  clear: both;
+}
 
 /* For IE 6/7 (trigger hasLayout) */
 .float-clearfix {
-  zoom: 1; }
-
-
-body{
-  margin:0;
-  padding:0
+  zoom: 1;
 }
 
-.header{
+body {
+  margin: 0;
+  padding: 0
+}
+
+.header {
   background-color: #222;
   color: #ffffff;
   padding: 20px;
 
-  h2{
+  h2 {
     font-size: 20px;
     padding: 0px;
     margin: 0px;
     color: #fff;
   }
-  a{
+  a {
     text-decoration: none;
     color: #ffffff;
     margin-left: 10px;
@@ -53,13 +57,14 @@ body{
 }
 
 md-input-container {
-  margin:0 !important;
+  margin: 0 !important;
 }
-md-input-container .md-errors-spacer{
+
+md-input-container .md-errors-spacer {
   min-height: 1px;
 }
 
-.hd{
+.hd {
   background-color: #efefef;
   border-radius: 5px 5px 0px 0px;
 }
@@ -71,32 +76,105 @@ md-input-container .md-errors-spacer{
   margin-left: auto;
   margin-right: auto;
 
-  div[col-name="hiring-status"]{
+  div[col-name="hiring-status"] {
     min-width: inherit !important;
     width: 100% !important;
   }
 
-  input[type="text"]{
+  input[type="text"] {
     outline: none;
   }
 
-  .ui-grid-cell-contents{
-    text-transform: capitalize;
+  .ui-grid-cell-contents {
+    //text-transform: capitalize;
+  }
+
+  /* ui grid css override */
+  [ui-grid-row] {
+    display: table-row;
+  }
+
+  .ui-grid-row, .ui-grid-cell {
+    height: auto !important;
+  }
+
+  .ui-grid-cell {
+    float: none;
+    display: table-cell;
+  }
+
+  .ui-grid-header-cell, .ui-grid-cell-contents {
+    white-space: normal;
+    padding: 2px;
+    word-break: break-word;
+  }
+
+  .grid1500637901676 .ui-grid-render-container-body .ui-grid-canvas {
+    width: 1911px;
+    height: auto;
   }
 }
-.drive-title{
+
+$grid-light-color: #777;
+$grid-dark-color: #000;
+
+.dashboard-ui-grid {
+  .ui-grid-header-cell {
+    text-align: center;
+
+    .ui-grid-invisible{
+      display: none;
+    }
+  }
+
+  .left-gap{
+    padding-left: 10px;
+  }
+  .test{
+    text-align: center;
+  }
+  .light-color,
+  .scheduled-on,
+  .email a,
+  .phone {
+    color: $grid-light-color;
+    font-size: 90%;
+  }
+
+  .participated,
+  .status,
+  .role {
+    text-transform: capitalize;
+  }
+  .stream {
+    text-transform: uppercase;
+  }
+  .comment {
+    text-align: left;
+  }
+
+  .email a {
+    &:hover {
+      color: #337ab7;
+      text-decoration: none;
+    }
+  }
+}
+
+.drive-title {
   margin-left: auto;
   margin-right: auto;
   width: 95%;
 
-  button{
+  button {
     margin-top: 12px;
   }
 }
-.custom-csv-link-location{
+
+.custom-csv-link-location {
   height: 0px;
 }
 
-.green{
+.green {
   color: green;
 }

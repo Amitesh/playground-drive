@@ -34,6 +34,7 @@
     "angular-material": "^1.1.4",
     "angular-messages": "^1.6.5",
     "angular-modal-service": "^0.12.1",
+    "angular-sanitize": "^1.6.5",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-grid": "^4.0.6",
     "angular-ui-router": "^1.0.3",

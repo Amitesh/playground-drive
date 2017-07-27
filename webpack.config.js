@@ -69,7 +69,10 @@ const config = {
             jQuery: "jquery"
         })
     ],
-    devtool: "#inline-source-map"
+    devtool: "#inline-source-map",
+    devServer: {
+        port: 3000
+    }
 }
 
 module.exports = config

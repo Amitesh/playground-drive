@@ -3,6 +3,7 @@
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 import angularAnimate from 'angular-animate';
+import ngSanitize from 'angular-sanitize';
 import angularMaterial from 'angular-material';
 import angularUIGrid from 'angular-ui-grid';
 import uiGridAutoFitColumns from 'ui-grid-auto-fit-columns';
@@ -30,11 +31,14 @@ import dashboardService from './services/dashboard.service';
 let interviewDriveApp = angular.module('idriveApp', [
     uirouter,
     angularAnimate,
+    ngSanitize,
     angularMaterial,
     angularUIGrid,
     'ui.grid.selection',
     'ui.grid.exporter',
     'ui.grid.moveColumns',
+    'ui.grid.autoResize',
+    'ui.grid.resizeColumns',
     uiGridAutoFitColumns,
     dashboardModule,
     navigationComponent,

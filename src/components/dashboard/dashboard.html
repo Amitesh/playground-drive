@@ -15,10 +15,12 @@
         <div id="candidate-drive-grid" ui-grid="grid"
              ui-grid-auto-fit-columns
              ui-grid-selection
-             ui-grid-resize-columns
+             ui-grid-auto-resize
+             ui-grid-resize-columns1
              ui-grid-exporter
              ui-grid-move-columns
-             class="dashboard-ui-grid"></div>
+             class="dashboard-ui-grid"
+             ng-style="{height: (gridOptions.data.length*gridOptions.rowHeight)+32+'px'}"></div>
     </div>
     <candidate></candidate>
 </div>
