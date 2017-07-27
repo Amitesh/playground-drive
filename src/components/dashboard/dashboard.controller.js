@@ -137,11 +137,11 @@ export default function dashboardController($scope, $http, $state, DashboardServ
 
         // Mettl test detail
         {
-            field: 'tests[0].score',
+            field: 'tests[0].participated',
             superCol: 'tests[0]',
-            displayName: "Score",
-            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
-            '<span class="score">{{row.entity.tests[0].score}}</span>'+
+            displayName: "Given",
+            cellTemplate: '<div class="ui-grid-cell-contents test  text-center" title="TOOLTIP">' +
+            '<span class="participated">{{row.entity.tests[0].participated}}</span>'+
             '</div>'
         },
         {
@@ -153,11 +153,11 @@ export default function dashboardController($scope, $http, $state, DashboardServ
             '</div>'
         },
         {
-            field: 'tests[0].participated',
+            field: 'tests[0].score',
             superCol: 'tests[0]',
-            displayName: "Given",
-            cellTemplate: '<div class="ui-grid-cell-contents test  text-center" title="TOOLTIP">' +
-            '<span class="participated">{{row.entity.tests[0].participated}}</span>'+
+            displayName: "Score",
+            cellTemplate: '<div class="ui-grid-cell-contents test" title="TOOLTIP">' +
+            '<span class="score">{{row.entity.tests[0].score}}</span>'+
             '</div>'
         },
 

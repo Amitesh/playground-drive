@@ -119,6 +119,9 @@ $grid-light-color: #777;
 $grid-dark-color: #000;
 
 .dashboard-ui-grid {
+  .ui-grid-row:hover .ui-grid-cell{
+    background-color: #e7f7ff;
+  }
   .ui-grid-header-cell {
     text-align: center;
 

@@ -9,18 +9,14 @@ export default function superColWidthUpdateDirective($timeout) {
             var _colId = scope.col.colDef.superCol,
                 _el = jQuery(element);
             _el.on('resize', function () {
-                console.log('calling resize...');
                 _updateSuperColWidth();
             });
 
             $(window).on('resize', function () {
-                console.log('calling resize...');
                 _updateSuperColWidth();
             });
 
             var _updateSuperColWidth = function () {
-                console.log('hahaha...')
-
 
                 $timeout(function () {
                     var _parentCol = jQuery('.ui-grid-header-cell[col-name="' + _colId + '"]');
@@ -59,7 +55,7 @@ export default function superColWidthUpdateDirective($timeout) {
 
                 jQuery('.ui-grid-header, .ui-grid-row').each(function (i, o) {
                     o = $(o);
-                    
+
                     gh += o.height();
 
                     if (o.hasClass('ui-grid-row')) {
@@ -73,7 +69,10 @@ export default function superColWidthUpdateDirective($timeout) {
                 jQuery('.ui-grid-canvas').height(rh);
 
             };
-            _updateSuperColWidth();
+
+            $timeout(function(){
+                _updateSuperColWidth();
+            }, 100);
         }
     };
 }
