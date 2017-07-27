@@ -124,12 +124,16 @@ $grid-dark-color: #000;
   }
   .ui-grid-header-cell {
     text-align: center;
+    outline: none;
 
     .ui-grid-invisible{
       display: none;
     }
   }
 
+  .ui-grid-header-cell-primary-focus{
+    outline: none;
+  }
   .left-gap{
     padding-left: 10px;
   }

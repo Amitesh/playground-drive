@@ -15,18 +15,14 @@ export default function dashboardController($scope, $http, $state, DashboardServ
         enableGridMenu: false,
         enableColumnResize: true,
         noUnselect: true,
-        rowHeight: 100
+        rowHeight: 100,
+        exporterCsvFilename: 'playground-drive-list.csv'
     };
 
     $scope.grid.onRegisterApi = function (gridApi) {
         $scope.gridApi = gridApi;
         gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-            var msg = 'row selected ' + row.isSelected;
-            //Open your link here.
-            console.log(msg, row);
             if(row.isSelected){
-                // open the edit pannel
-                // var a = angular.copy(row);
                 DashboardService.setSelectedRow(row);
                 $state.go('app.dashboard.candidate', {row: null});
             }
@@ -70,11 +66,12 @@ export default function dashboardController($scope, $http, $state, DashboardServ
                     '<span class="scheduled-on">{{row.entity.drive.scheduledOn}}</span>' +
                 '</div>'
         },
-        // {
-        //     field: 'drive.scheduledOn',
-        //     superCol: 'drive',
-        //     displayName: "Scheduled On"
-        // },
+        {
+            field: 'drive.scheduledOn',
+            superCol: 'drive',
+            displayName: "Scheduled On",
+            visible: false
+        },
         {
             field: 'drive.participated',
             superCol: 'drive',
@@ -102,21 +99,24 @@ export default function dashboardController($scope, $http, $state, DashboardServ
                     '<span class="phone">{{row.entity.candidate.phone}}</span>' +
                 '</div>'
         },
-        // {
-        //     field: 'candidate.lastname',
-        //     superCol: 'candidate',
-        //     displayName: "Last name"
-        // },
-        // {
-        //     field: 'candidate.email',
-        //     superCol: 'candidate',
-        //     displayName: "Email"
-        // },
-        // {
-        //     field: 'candidate.phone',
-        //     superCol: 'candidate',
-        //     displayName: "Phone"
-        // },
+        {
+            field: 'candidate.lastname',
+            superCol: 'candidate',
+            displayName: "Last name",
+            visible: false
+        },
+        {
+            field: 'candidate.email',
+            superCol: 'candidate',
+            displayName: "Email",
+            visible: false
+        },
+        {
+            field: 'candidate.phone',
+            superCol: 'candidate',
+            displayName: "Phone",
+            visible: false
+        },
         {
             field: 'candidate.stream',
             superCol: 'candidate',
@@ -249,6 +249,6 @@ export default function dashboardController($scope, $http, $state, DashboardServ
 
     $scope.export = function(){
         var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
-        $scope.gridApi.exporter.csvExport( /* row */ 'visible',  'all', myElement );
+        $scope.gridApi.exporter.csvExport( /* row */ 'visible', /* column */  'all', myElement );
     }
 }
