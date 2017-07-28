@@ -248,7 +248,23 @@ export default function dashboardController($scope, $http, $state, DashboardServ
     };
 
     $scope.export = function(){
+        // http://www.prathapkudupublog.com/2016/02/csv-import-for-angular-ui-grid.html
         var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
         $scope.gridApi.exporter.csvExport( /* row */ 'visible', /* column */  'all', myElement );
+    }
+
+    $scope.read = function(){
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            console.log('onload', arguments);
+            console.log(reader.result);
+
+        } //uiGridImporterService.importJsonClosure(gridApi.grid);
+
+        var file = document.getElementById('import-file');
+        console.log(file);
+        reader.readAsText(file.files[0]);
+
     }
 }

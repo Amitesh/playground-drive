@@ -168,6 +168,13 @@ $grid-dark-color: #000;
   }
 }
 
+#import-file {
+  display: block;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
 .drive-title {
   margin-left: auto;
   margin-right: auto;

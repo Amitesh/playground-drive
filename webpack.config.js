@@ -7,14 +7,14 @@ const extractCommons = new webpack.optimize.CommonsChunkPlugin({
     name: ['commons', 'vendor'],
     filename: 'commons.js',
     minChunks: Infinity
-})
+});
 
 const config = {
     context: path.resolve(__dirname, 'src'),
     entry: {
         app: './app.js',
         admin: './admin.js',
-        vendor: ['jquery', 'bootstrap', 'angular', 'moment']
+        vendor: ['jquery', 'bootstrap', 'angular', 'moment', 'csv-js']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -66,13 +66,14 @@ const config = {
         new webpack.NamedModulesPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
-            jQuery: "jquery"
+            jQuery: "jquery",
+            CSV: "csv-js"
         })
     ],
     devtool: "#inline-source-map",
     devServer: {
         port: 3000
     }
-}
+};
 
-module.exports = config
+module.exports = config;

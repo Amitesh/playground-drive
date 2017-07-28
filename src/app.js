@@ -18,6 +18,7 @@ if (module.hot) {
 
 import navigationComponent from './components/navigation/navigation';
 import dashboardModule from './components/dashboard/index';
+import importModule from './components/import/index';
 import headerComponent from './components/header';
 import candidateComponent from './components/candidate';
 import appComponent from './components/app/app.component';
@@ -36,11 +37,13 @@ let interviewDriveApp = angular.module('idriveApp', [
     angularUIGrid,
     'ui.grid.selection',
     'ui.grid.exporter',
+    'ui.grid.importer',
     'ui.grid.moveColumns',
     'ui.grid.autoResize',
     'ui.grid.resizeColumns',
     uiGridAutoFitColumns,
     dashboardModule,
+    importModule,
     navigationComponent,
     headerComponent,
     candidateComponent
@@ -48,7 +51,6 @@ let interviewDriveApp = angular.module('idriveApp', [
 
 interviewDriveApp.config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
     'ngInject';
-
     // $locationProvider.html5Mode(true);
     // $locationProvider.hashPrefix('!');
 
@@ -62,6 +64,10 @@ interviewDriveApp.config(function ($urlRouterProvider, $locationProvider, $state
         .state('app.dashboard', {
             url: '/dashboard',
             template: '<dashboard></dashboard>'
+        })
+        .state('app.import', {
+            url: '/import',
+            template: '<import></import>'
         })
         .state('app.dashboard.candidate', {
             url: '/candidate/add-edit',

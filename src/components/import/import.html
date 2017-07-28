@@ -1,0 +1,18 @@
+<div>
+    <div class="drive-title float-clearfix">
+        <h3 class="float-left">
+            Import candidates
+        </h3>
+        <div class="float-right">
+            <button ng-click="vm.import()" class="md-button md-ink-ripple">Import</button>
+            <button ng-click="vm.reset()" class="md-button md-ink-ripple">Clear</button>
+        </div>
+    </div>
+    <div>
+        <input type="file" id="import-file">
+        <div id="candidate-import-grid" ui-grid="vm.gridOptions" ui-grid-importer
+             class="dashboard-ui-grid"></div>
+    </div>
+
+
+</div>
