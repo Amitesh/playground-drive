@@ -13,6 +13,10 @@
         <div id="candidate-import-grid" ui-grid="vm.gridOptions" ui-grid-importer
              class="dashboard-ui-grid"></div>
     </div>
-
+    <div class="download-sample-csv">
+        <p>Sample file to upload the candidates details for a drive</p>
+        <!--<a href="void()" ng-click="downloadSampleCSV($event)">Download sample excel file (CSV format)</a>-->
+        <button ng-click="vm.downloadSampleCSV()">Download</button>
+    </div>
 
 </div>
